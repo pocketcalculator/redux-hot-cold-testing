@@ -5,7 +5,7 @@ const initialState = {
     feedback: 'Make your guess!',
     auralStatus: '',
     correctAnswer: Math.round(Math.random() * 100) + 1
-};
+}
 
 export default (state = initialState, action) => {
     if (action.type === RESTART_GAME) {
