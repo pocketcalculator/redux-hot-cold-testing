@@ -1,17 +1,15 @@
+import reducer from './reducer'
 import {makeGuess, restartGame, generateAuralUpdate} from './actions'
-import {reducer} from './reducer'
 
-describe{'Reducer', () => {
-  const guesses = [10, 20, 30]
-  const feedback = 'Testing the reducer'
-  const auralStatus = 'Testing aural status'
-  const correctAnswer = Math.round(Math.random() * 100) + 1
+describe('Reducer', () => {
 
   it('Should set the initial state when nothing is passed in', () => {
     const state = reducer(undefined, {type: '__UNKNOWN'})
-    expect(state).toEqual({
-      guesses: []
-    })
+    expect(state.guesses).toEqual([])
+    expect(state.feedback).toEqual('Make your guess!')
+    expect(state.auralStatus).toEqual('')
+    expect(state.correctAnswer).toBeGreaterThanOrEqual(0)
+    expect(state.correctAnswer).toBeLessThanOrEqual(100)
   })
 
   it('Should return the current state on an unknown action', () => {
@@ -22,12 +20,12 @@ describe{'Reducer', () => {
 
   describe('makeGuess', () => {
     it('Should make a guess', () => {
-      let state = {
-        guesses: [],
-        feedback: 'Make your guess!',
-        auralStatus: '',
-        correctAnswer: Math.round(Math.random() * 100) + 1
-      }
+      let state
+      state = Reducer(state, makeGuess(guess))
+      expect(state).toEqual({
+        guesses: [11]
+      })
     })
   })
-}
+
+})
