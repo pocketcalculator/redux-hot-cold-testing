@@ -18,14 +18,11 @@ describe('Reducer', () => {
     expect(state).toBe(currentState)
   })
 
-  describe('makeGuess', () => {
-    it('Should make a guess', () => {
-      let state
-      state = Reducer(state, makeGuess(guess))
-      expect(state).toEqual({
-        guesses: [11]
-      })
-    })
+  it('Should send feedback when the guess is a non-number', () => {
+    let state
+    let guess = 'A'
+    state = reducer(state, makeGuess(guess))
+    expect(state.feedback).toEqual('Please enter a valid number.')
   })
 
 })
