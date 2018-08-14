@@ -23,6 +23,30 @@ describe('Reducer', () => {
     let guess = 'A'
     state = reducer(state, makeGuess(guess))
     expect(state.feedback).toEqual('Please enter a valid number.')
+    expect(state.guesses).toEqual([NaN])
+  })
+
+  it('Should add a guess to the array and send the corrrect feedback', () => {
+    let state = {
+      guesses: [10,20,30],
+      correctAnswer: 100,
+      feedback: ''
+    }
+    state  = reducer(state, makeGuess(40))
+    expect(state.guesses).toEqual([10,20,30,40])
+    expect(state.feedback).toEqual("You're Ice Cold...")
+    state = reducer(state, makeGuess(70))
+    expect(state.guesses).toEqual([10,20,30,40,70])
+    expect(state.feedback).toEqual("You're Cold...")
+    state = reducer(state, makeGuess(80))
+    expect(state.guesses).toEqual([10,20,30,40,70,80])
+    expect(state.feedback).toEqual("You're Warm.")
+    state = reducer(state, makeGuess(99))
+    expect(state.guesses).toEqual([10,20,30,40,70,80,99])
+    expect(state.feedback).toEqual("You're Hot!")
+    state = reducer(state, makeGuess(100))
+    expect(state.guesses).toEqual([10,20,30,40,70,80,99,100])
+    expect(state.feedback).toEqual("You got it!")
   })
 
 })
