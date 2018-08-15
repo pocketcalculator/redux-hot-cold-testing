@@ -49,4 +49,38 @@ describe('Reducer', () => {
     expect(state.feedback).toEqual("You got it!")
   })
 
+  it('Should reset everything when the game restarts', () => {
+    let state = {
+      guesses: [10,20,30],
+      correctAnswer: 101,
+      feedback: "You're Ice Cold..."
+    }
+    const correctAnswer = 99
+    state = reducer(state, restartGame(correctAnswer))
+    expect(state.guesses).toEqual([])
+    expect(state.correctAnswer).not.toBe(101)
+    expect(state.feedback).toBe('Make your guess!')
+    expect(state.correctAnswer).toEqual(correctAnswer)
+  })
+
+  it('Should supply accurate aural feedback and correct syntax for first guess', () => {
+    let state = {
+      guesses: [10],
+      correctAnswer: 101,
+      feedback: "You're Ice Cold..."
+    }
+    state = reducer(state, generateAuralUpdate())
+    expect(state.auralStatus).toEqual("Here's the status of the game right now: You're Ice Cold... You've made 1 guess. It was: 10")
+  })
+
+  it('Should supply accurate aural feedback and correct syntax for multiple guesses', () => {
+    let state = {
+      guesses: [10, 20, 30],
+      correctAnswer: 101,
+      feedback: "You're Ice Cold..."
+    }
+    state = reducer(state, generateAuralUpdate())
+    expect(state.auralStatus).toEqual("Here's the status of the game right now: You're Ice Cold... You've made 3 guesses. In order of most- to least-recent, they are: 30, 20, 10")
+  })
+
 })
