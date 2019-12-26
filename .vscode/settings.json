@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/f99e6cc2-5729-4465-a0cc-8258acadb10b/resourceGroups/POCAppService/providers/Microsoft.Web/sites/adapturehotorcold",
+    "appService.deploySubpath": ""
+}
